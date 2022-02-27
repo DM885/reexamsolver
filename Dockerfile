@@ -1,6 +1,6 @@
 FROM node:16.3-alpine3.12
 
-# Create app directory main directory
+# Create app directory main directory  # change main #
 WORKDIR /usr/src/app
 
 # Install app dependencies
