@@ -8,12 +8,11 @@ on:
     branches: [ main ]
   pull_request:
     branches: [ main ]
-
 env:
   CICD_TOGGLE: true                              # Change this to true when you are ready to use the pipeline
   PROJECT_ID: ${{secrets.GKE_PROJECT}}
-  GKE_CLUSTER: buildcluster
-  GKE_ZONE: europe-north1
+  GKE_CLUSTER: dm885cluster
+  GKE_ZONE: europe-north1-a
   NAMESPACE: rabbits                                              # Maybe change this, probably not though.
   DEPLOYMENT_NAME: solver-info                                    # Change this to match the name in the deployment.yaml
 
@@ -23,7 +22,7 @@ jobs:
     steps:
       # Check for cancellation
       - name: Check for cancellation
-        if: env.CICD_TOGGLE == 'false'
+        if: env.CICD_TOGGLE == 'true'
         uses: andymckay/cancel-action@0.2
         continue-on-error: true
       # Check out code
@@ -159,12 +158,16 @@ jobs:
       - run: |-
           gcloud --quiet auth configure-docker
 
-      - uses: google-github-actions/get-gke-credentials@fb08709ba27618c31c09e014e1d8364b02e5042e
+      - uses: google-github-actions/get-gke-credentials@fb08709ba27618c31c09e014e1d8364b02e5042e      
         with:
           cluster_name: ${{ env.GKE_CLUSTER }}
           location: ${{ env.GKE_ZONE }}
           credentials: ${{ secrets.GKE_SA_KEY }}
+      
+      - run: |-
+         gcloud container clusters get-credentials "$GKE_CLUSTER" --zone "$GKE_ZONE"
 
       # Deploy the Docker image to the GKE BUILD cluster
       - name: Deploy to GKE Cluster
         run: kubectl -n ${{ env.NAMESPACE }} apply -f ./deployment.yaml && kubectl -n ${{ env.NAMESPACE }} rollout restart deployment/${{ env.DEPLOYMENT_NAME }}
+
