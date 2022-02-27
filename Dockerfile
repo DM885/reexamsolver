@@ -2,7 +2,7 @@ FROM node:17.5-alpine3.14
 #FROM node:16.3-alpine3.12
 
 
-# Create app directory main directory #### change main #3
+# Create app directory main directory #### change main #4
 WORKDIR /usr/src/app
 
 # Install app dependencies
