@@ -10,6 +10,8 @@ WORKDIR /usr/src/app
 # where available (npm@5+)
 COPY package*.json ./
 
+#add some text here
+RUN echo "check the image here"
 # If you are building your code for production
 RUN npm ci --only=production
 
