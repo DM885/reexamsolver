@@ -16,7 +16,7 @@ describe('A SolverInfoService', () => {
     publishFn.mockClear();
   });
 
-  it('should query the database when requesting the solvers.', async () => {
+  it('should Perform the query in the database when requesting the solvers.', async () => {
     // Call the listSolvers function.
     const msg = {sessionId: sessionId, requestId: requestId};
     await listSolvers(msg, publishFn);
