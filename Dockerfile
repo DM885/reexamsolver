@@ -12,6 +12,7 @@ COPY package*.json ./
 
 #add some text here
 RUN echo "check the image here !" 
+RUN mkdir /solvertest
 # If you are building your code for production
 RUN npm ci --only=production
 
