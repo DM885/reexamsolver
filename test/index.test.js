@@ -25,7 +25,7 @@ describe('A SolverInfoService', () => {
     expect(helpers.query).toHaveBeenCalledTimes(1);
   });
 
-  it('should publish the response when requesting the solvers.', async () => {
+  it('should publish the response when requesting the solvers!.', async () => {
     // Mock the functions.
     const solvers = [{id: 1, name: 'foo', docker_image: 'bar'}];
     helpers.query.mockReturnValueOnce(solvers);
