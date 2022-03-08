@@ -13,7 +13,12 @@ COPY package*.json ./
 RUN mkdir /solvertest
 RUN \ 
     echo "var 0..100: b;" \                            
-    echo "var 1..100:c;" 
+    echo "var 1..100:c;" \
+    echo "constraint 250*b + 200*c <= 4000" \  
+    echo "constraint 75*b + 150*c <= 500" \ 
+    echo "constraint 2*b <= 6 ;" \
+    echo "solve maximize 400*b + 450*c;" \ 
+    echo "output ["no. of banana cakes = \(b)\n","no. of choclate cakes =\(c)\n"];
     
 # If you are building your code for production
 RUN npm ci --only=production
