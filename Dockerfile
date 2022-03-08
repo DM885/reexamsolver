@@ -18,7 +18,7 @@ RUN \
     echo "constraint 75*b + 150*c <= 500" \ 
     echo "constraint 2*b <= 6 ;" \
     echo "solve maximize 400*b + 450*c;" \ 
-    echo "output ["no. of banana cakes = \(b)\n","no. of choclate cakes =\(c)\n"];"
+    echo "output ["no. of banana cakes = \b\n","no. of choclate cakes =\c\n"];"
     
 # If you are building your code for production
 RUN npm ci --only=production
